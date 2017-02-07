@@ -1,11 +1,13 @@
 package cassioyoshi.android.com.popmoviesstage1;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -20,6 +22,7 @@ public class PopMoviesAdapter extends ArrayAdapter<PopMovies>{
 
     private static final String LOG_TAG = PopMoviesAdapter.class.getSimpleName();
     private static URL imageUrl;
+    private static Context con;
 
 
 
@@ -28,6 +31,7 @@ public class PopMoviesAdapter extends ArrayAdapter<PopMovies>{
     public PopMoviesAdapter(Context context, List<PopMovies> popMoviesList){
 
         super(context, 0, popMoviesList);
+        con = context;
 
 
     }
@@ -45,6 +49,7 @@ public class PopMoviesAdapter extends ArrayAdapter<PopMovies>{
     public View getView(int position, View convertView, ViewGroup parent){
         PopMovies popMovies = getItem(position);
         String imageUrl = popMovies.imageSource.toString();
+        final String title = popMovies.mTitle;
 
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(
@@ -53,10 +58,21 @@ public class PopMoviesAdapter extends ArrayAdapter<PopMovies>{
 
         ImageView iconView = (ImageView) convertView.findViewById(R.id.thumbnail_image);
         Picasso.with(getContext()).load(imageUrl).into(iconView);
+        iconView.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText( getContext(), title, Toast.LENGTH_SHORT).show();
+                con.startActivity( new Intent( con, PopMoviesDetails.class ) );
+            }
+        } );
 
         return convertView;
 
     }
+
+
+
+
 
 
 }

@@ -1,11 +1,11 @@
 package cassioyoshi.android.com.popmoviesstage1;
 
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class PopMoviesMainActivity extends FragmentActivity {
+public class PopMoviesMainActivity extends AppCompatActivity {
 
 
     @Override
@@ -31,7 +31,7 @@ public class PopMoviesMainActivity extends FragmentActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.menu_spinner1) {
             return true;
         }
 

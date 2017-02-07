@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Popular Movies Stage1</string>
+    <string name="default_text">Try to do yourself</string>
 
     <string name="action_settings">Settings</string>
 </resources>

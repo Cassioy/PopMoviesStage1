@@ -22,7 +22,10 @@ public class PopMovies {
         this.mPoster_path = poster_path;
     }
 
-    public PopMovies(URL url) { this.imageSource = url; }
+    public PopMovies(URL url, String title) {
+        this.imageSource = url;
+        this.mTitle = title;
+    }
 
 
 

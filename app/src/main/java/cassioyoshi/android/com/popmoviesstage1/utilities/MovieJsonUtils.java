@@ -73,7 +73,7 @@ public class MovieJsonUtils {
             URL buildImage = NetworkUtils.buildImageUrl(poster_image);
 
 
-            moviePopular.add(new PopMovies(buildImage));
+            moviePopular.add(new PopMovies(buildImage, movie_title));
         }
 
         return moviePopular;
