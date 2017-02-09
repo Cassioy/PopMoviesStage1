@@ -4,4 +4,11 @@
     android:id="@+id/toolbar"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="?attr/colorPrimary"/>
+    android:background="?attr/colorPrimary">
+
+    <Spinner
+        android:id="@+id/spinner_nav"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    </android.support.v7.widget.Toolbar>

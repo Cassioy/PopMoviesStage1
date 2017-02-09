@@ -1,6 +1,5 @@
 package cassioyoshi.android.com.popmoviesstage1;
 
-import android.app.Dialog;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -9,7 +8,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.Spinner;
 
 public class PopMoviesMainActivity extends AppCompatActivity {
@@ -18,20 +16,6 @@ public class PopMoviesMainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pop_movies_main);
-
-        final Dialog dialog = new Dialog(this);
-        dialog.setContentView(R.layout.popup_content);
-        dialog.setTitle("Welcome to Popular Movies!!");
-
-        Button button = (Button) dialog.findViewById(R.id.Button01);
-        button.setOnClickListener( new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
-
-        dialog.show();
 
         // Find the toolbar view inside the activity layout
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -72,6 +56,7 @@ public class PopMoviesMainActivity extends AppCompatActivity {
 
 
                 }if (selectedItemText == "Top Rated") {
+                    
                     String item = "top_rated";
 
                 }
@@ -97,6 +82,11 @@ public class PopMoviesMainActivity extends AppCompatActivity {
         if (id == R.id.menu_spinner1) {
             return true;
         }
+        if (id == android.R.id.home) {
+            // API 5+ solution
+            onBackPressed();
+            return true;
+        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -106,6 +96,14 @@ public class PopMoviesMainActivity extends AppCompatActivity {
     {
         super.onStart();
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        // TODO Auto-generated method stub
+        super.onBackPressed();
+        PopMoviesMainActivity.this.overridePendingTransition(R.anim.trans_right_in,
+                R.anim.trans_right_out);
     }
 }
 
