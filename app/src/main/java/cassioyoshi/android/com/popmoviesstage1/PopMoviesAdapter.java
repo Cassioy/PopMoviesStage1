@@ -7,10 +7,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
+import java.io.Serializable;
 import java.net.URL;
 import java.util.List;
 
@@ -18,7 +18,7 @@ import java.util.List;
  * Created by cassioimamura on 2/4/17.
  */
 
-public class PopMoviesAdapter extends ArrayAdapter<PopMovies>{
+public class PopMoviesAdapter extends ArrayAdapter<PopMovies> implements Serializable{
 
     private static final String LOG_TAG = PopMoviesAdapter.class.getSimpleName();
     private static URL imageUrl;
@@ -46,9 +46,10 @@ public class PopMoviesAdapter extends ArrayAdapter<PopMovies>{
      */
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent){
-        PopMovies popMovies = getItem(position);
-        String imageUrl = popMovies.imageSource.toString();
+    public View getView(final int position, View convertView, ViewGroup parent){
+        final PopMovies popMovies = getItem(position);
+        String imageUrl = popMovies.posterSource.toString();
+        final String backDropUrl = popMovies.backdropSource.toString();
         final String title = popMovies.mTitle;
 
         if (convertView == null) {
@@ -56,13 +57,16 @@ public class PopMoviesAdapter extends ArrayAdapter<PopMovies>{
                     R.layout.pop_movies_item_grid, parent, false);
         }
 
+
         ImageView iconView = (ImageView) convertView.findViewById(R.id.thumbnail_image);
         Picasso.with(getContext()).load(imageUrl).into(iconView);
         iconView.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText( getContext(), title, Toast.LENGTH_SHORT).show();
-                con.startActivity( new Intent( con, PopMoviesDetails.class ) );
+                Intent detailsIntent = new Intent(con,PopMoviesDetails.class);
+                detailsIntent.putExtra("backdropImage", popMovies.backdropSource);
+                detailsIntent.putExtra( "title", popMovies.mTitle );
+                con.startActivity(detailsIntent);
             }
         } );
 

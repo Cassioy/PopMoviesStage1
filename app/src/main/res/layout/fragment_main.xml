@@ -10,6 +10,4 @@
     tools:context=".PopMoviesFragment"
     android:id="@+id/movies_grid">
 
-
-
 </GridView>

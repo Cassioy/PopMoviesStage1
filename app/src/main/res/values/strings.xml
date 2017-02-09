@@ -1,6 +1,11 @@
 <resources>
-    <string name="app_name">Popular Movies Stage1</string>
+    <string name="app_name">Popular Movies Stage 1</string>
     <string name="default_text">Try to do yourself</string>
 
     <string name="action_settings">Settings</string>
+    <string-array name="spinner_items">
+        <item>Sort By</item>
+        <item>Popular</item>
+        <item>Top Rated</item>
+    </string-array>
 </resources>

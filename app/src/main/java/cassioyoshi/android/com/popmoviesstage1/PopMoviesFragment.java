@@ -1,6 +1,7 @@
 package cassioyoshi.android.com.popmoviesstage1;
 
 import android.app.Fragment;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import java.net.URL;
@@ -23,12 +25,14 @@ import cassioyoshi.android.com.popmoviesstage1.utilities.NetworkUtils;
 
 public class PopMoviesFragment extends Fragment {
 
-    private String location;
+    private String category_chooser;
+    public Context mContext;
     private PopMoviesAdapter adapter;
     private PopMoviesAdapter popMoviesAdapter;
     private static final String LOG_TAG = PopMoviesFragment.class.getSimpleName();
     private List<PopMovies> moviesArrayList;
     private GridView moviesGrid;
+    private FetchMoviesTask task;
 
 
     public PopMoviesFragment() {
@@ -37,44 +41,47 @@ public class PopMoviesFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View rootView = inflater.inflate( R.layout.fragment_main, container, false );
+        mContext = rootView.getContext();
+        new FetchMoviesTask().execute("popular");
 
-        new FetchMoviesTask().execute();
 
-        View rootView = inflater.inflate(R.layout.fragment_main, container, false);
 
-        moviesGrid = (GridView) rootView.findViewById(R.id.movies_grid);
+        moviesGrid = (GridView) rootView.findViewById( R.id.movies_grid );
 
-        moviesGrid.setAdapter(popMoviesAdapter);
-
+        moviesGrid.setAdapter(adapter);
 
         return rootView;
     }
 
-    public class FetchMoviesTask extends AsyncTask<Void, Void, List<PopMovies>> {
+    public class FetchMoviesTask extends AsyncTask<String, Void, List<PopMovies>> {
+
 
         @Override
         protected void onPreExecute() {
-            Toast.makeText( getActivity(),"Welcome To Popular Video App!", Toast.LENGTH_LONG ).show();
 
         }
 
         @Override
-        protected ArrayList<PopMovies> doInBackground(Void... params) {
+        protected ArrayList<PopMovies> doInBackground(String... params) {
 
-            URL movieRequestUrl = NetworkUtils.buildUrl(location);
 
-            Log.e(LOG_TAG, "this url is: " + movieRequestUrl);
+            String choose_category = params[0];
+            URL movieRequestUrl = NetworkUtils.buildUrl(choose_category);
+
+            Log.e( LOG_TAG, "this url is: " + movieRequestUrl );
 
             try {
                 String jsonMovieResponse = NetworkUtils
-                        .getResponseFromHttpUrl(movieRequestUrl);
+                        .getResponseFromHttpUrl( movieRequestUrl );
+
 
                 ArrayList<PopMovies> simpleJsonMovieData = MovieJsonUtils
-                        .getSimpleMovieStringsFromJson(PopMoviesFragment.this, jsonMovieResponse);
+                        .getSimpleMovieStringsFromJson( PopMoviesFragment.this, jsonMovieResponse );
 
                 updateData(simpleJsonMovieData);
 
-                adapter = new PopMoviesAdapter(getContext(), moviesArrayList);
+                adapter = new PopMoviesAdapter(mContext, moviesArrayList );
 
                 return simpleJsonMovieData;
 
@@ -87,21 +94,31 @@ public class PopMoviesFragment extends Fragment {
         @Override
         protected void onPostExecute(List<PopMovies> simpleJsonMovieData) {
 
-                if (simpleJsonMovieData != null && !simpleJsonMovieData.isEmpty()) {
+            if (simpleJsonMovieData != null && !simpleJsonMovieData.isEmpty()) {
 
-                    moviesGrid.invalidateViews();
-                    moviesGrid.setAdapter(adapter);
+                hideProgressBar();
 
+                moviesGrid.invalidateViews();
+                moviesGrid.setAdapter( adapter );
 
-                }
-
+            }else{
+                Toast.makeText( getContext(), "Could not Retrieve Information", Toast.LENGTH_SHORT ).show();
+            }
         }
 
     }
 
-    public void updateData(List<PopMovies> movieList){
+    public void updateData(List<PopMovies> movieList) {
         moviesArrayList = movieList;
     }
+
+    public void hideProgressBar() {
+
+        ProgressBar progress = (ProgressBar)getActivity().findViewById(R.id.progressBarFetch);
+        progress.setVisibility(View.GONE);
+
+    }
+
 
 }
 

@@ -20,7 +20,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".PopMoviesDetails">
+        <activity android:name=".PopMoviesDetails" android:parentActivityName=".PopMoviesMainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
             </intent-filter>

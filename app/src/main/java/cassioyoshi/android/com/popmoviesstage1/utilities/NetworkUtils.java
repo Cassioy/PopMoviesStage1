@@ -17,9 +17,10 @@ public class NetworkUtils {
 
     private static final String TAG = NetworkUtils.class.getSimpleName();
 
-    private static final String MOVIES_BASE_URL = "http://api.themoviedb.org/3/movie/popular";
+    private static final String MOVIES_BASE_URL = "http://api.themoviedb.org/3/movie/";
+    private static final String CATEGORY = "popular";
     private static final String IMAGES_BASE_URL = "http://image.tmdb.org/t/p/w500/";
-    private static final String API_KEY = "";
+    private static final String API_KEY = "47569fa341aee731236827f968b4c01d";
 
     /* The units we want our API to return */
     private static final String language = "en-US";
@@ -32,7 +33,7 @@ public class NetworkUtils {
 
         URL url = null;
         try{
-            url = new URL(MOVIES_BASE_URL + "?api_key=" + API_KEY + "&language=" + language);
+            url = new URL(MOVIES_BASE_URL + categoryChoose + "?api_key=" + API_KEY + "&language=" + language);
         }catch (MalformedURLException e) {
             Log.e(TAG, "Problem building the URL ", e);
         }

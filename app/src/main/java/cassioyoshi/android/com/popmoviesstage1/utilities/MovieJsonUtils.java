@@ -71,9 +71,10 @@ public class MovieJsonUtils {
             String release_date = movieJsonObject.getString(RELEASE_DATE);
 
             URL buildImage = NetworkUtils.buildImageUrl(poster_image);
+            URL buildBackdrop = NetworkUtils.buildImageUrl(backdrop_image);
 
 
-            moviePopular.add(new PopMovies(buildImage, movie_title));
+            moviePopular.add(new PopMovies(buildImage, buildBackdrop, movie_title, overview, user_rating, release_date));
         }
 
         return moviePopular;
