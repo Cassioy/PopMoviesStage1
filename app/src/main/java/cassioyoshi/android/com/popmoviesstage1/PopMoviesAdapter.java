@@ -65,7 +65,11 @@ public class PopMoviesAdapter extends ArrayAdapter<PopMovies> implements Seriali
             public void onClick(View v) {
                 Intent detailsIntent = new Intent(con,PopMoviesDetails.class);
                 detailsIntent.putExtra("backdropImage", popMovies.backdropSource);
+                detailsIntent.putExtra( "posterImage", popMovies.posterSource );
                 detailsIntent.putExtra( "title", popMovies.mTitle );
+                detailsIntent.putExtra( "plotSynopsis", popMovies.mPlotSynopsis);
+                detailsIntent.putExtra( "releaseDate", popMovies.mReleaseDate );
+                detailsIntent.putExtra( "voteAvg", popMovies.mVoteAvg );
                 con.startActivity(detailsIntent);
             }
         } );

@@ -16,11 +16,12 @@
     </android.support.v7.widget.Toolbar>
 
     <ProgressBar
-    android:id="@+id/progressBarFetch"
-    style="?android:attr/progressBarStyleLarge"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center"/>
+        android:id="@+id/progressBarFetch"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"/>
+
 
 
     <fragment
@@ -30,6 +31,7 @@
         android:id="@+id/fragment"
         android:name="cassioyoshi.android.com.popmoviesstage1.PopMoviesFragment"
         tools:layout="@layout/fragment_main"></fragment>
+
 
 
 </LinearLayout>
