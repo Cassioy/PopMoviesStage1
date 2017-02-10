@@ -77,8 +77,9 @@ public class PopMoviesDetails extends AppCompatActivity {
             fab.setOnClickListener(new View.OnClickListener() {
                                        @Override
                                        public void onClick(View v) {
-                                           fab.setSelected( !fab.isSelected() );
                                            fab.setImageResource( fab.isSelected() ? R.drawable.ic_grade_white_48px : R.drawable.ic_grade_yellow_48px );
+                                           fab.setSelected( !fab.isSelected() );
+
                                        }
 
                                    });
