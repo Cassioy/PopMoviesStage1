@@ -101,8 +101,7 @@ public class PopMoviesMainActivity extends AppCompatActivity {
     public void onBackPressed() {
         // TODO Auto-generated method stub
         super.onBackPressed();
-        PopMoviesMainActivity.this.overridePendingTransition(R.anim.trans_right_in,
-                R.anim.trans_right_out);
+
     }
 
 

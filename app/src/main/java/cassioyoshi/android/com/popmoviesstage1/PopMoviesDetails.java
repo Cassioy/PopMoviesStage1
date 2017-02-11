@@ -125,8 +125,8 @@ public class PopMoviesDetails extends AppCompatActivity {
         // TODO Auto-generated method stub
         super.onBackPressed();
 
-        PopMoviesDetails.this.overridePendingTransition(R.anim.trans_right_in,
-                R.anim.trans_right_out);
+        PopMoviesDetails.this.overridePendingTransition(R.anim.trans_left_out,
+                R.anim.trans_left_in);
     }
 
 }
