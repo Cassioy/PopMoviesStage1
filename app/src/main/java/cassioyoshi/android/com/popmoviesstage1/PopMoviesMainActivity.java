@@ -1,16 +1,22 @@
 package cassioyoshi.android.com.popmoviesstage1;
 
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.ShareCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
+
 
 public class PopMoviesMainActivity extends AppCompatActivity {
+
+    private static final String SORT_MOVIE_POPULAR = "popular";
+    private static final String SORT_MOVIE_TOP_RATED = "top_rated";
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,41 +38,11 @@ public class PopMoviesMainActivity extends AppCompatActivity {
 
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
-        MenuItem item = menu.findItem( R.id.menu_spinner1 );
-        Spinner spinner = (Spinner) item.getActionView();
+        MenuItem menuItem = menu.findItem(R.id.popular);
+        menuItem.setIntent(createSharePopIntent());
 
-
-        // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<CharSequence> adapterSpinner = ArrayAdapter.createFromResource(this,
-                R.array.spinner_items, R.layout.simple_spinner_item);
-
-        // Specify the layout to use when the list of choices appears
-        adapterSpinner.setDropDownViewResource(R.layout.simple_spinner_dropdown_item);
-
-        // Apply the adapter to the spinner
-        spinner.setAdapter(adapterSpinner);
-
-        spinner.setOnItemSelectedListener( new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String selectedItemText = (String) parent.getItemAtPosition(position);
-            if(selectedItemText == "Popular");
-                {
-                    String item = "popular";
-
-
-                }if (selectedItemText == "Top Rated") {
-                    
-                    String item = "top_rated";
-
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        } );
+        MenuItem menuItem2 = menu.findItem(R.id.topRated);
+        menuItem2.setIntent(createShareTopIntent());
 
         return true;
     }
@@ -79,16 +55,41 @@ public class PopMoviesMainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.menu_spinner1) {
-            return true;
-        }
-        if (id == android.R.id.home) {
-            // API 5+ solution
-            onBackPressed();
-            return true;
+        switch (id) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+
+            case R.id.popular:
+                addNewFrag( "popular" );
+
+                return true;
+
+            case R.id.topRated:
+                addNewFrag( "top_rated" );
+
+                return true;
+
         }
 
+
         return super.onOptionsItemSelected(item);
+    }
+
+    private Intent createSharePopIntent() {
+        Intent shareIntent = ShareCompat.IntentBuilder.from(this)
+                .setType("text/plain")
+                .setText(SORT_MOVIE_POPULAR)
+                .getIntent();
+        return shareIntent;
+    }
+
+    private Intent createShareTopIntent() {
+        Intent share1Intent = ShareCompat.IntentBuilder.from(this)
+                .setType("text/plain")
+                .setText(SORT_MOVIE_TOP_RATED)
+                .getIntent();
+        return share1Intent;
     }
 
     @Override
@@ -105,5 +106,17 @@ public class PopMoviesMainActivity extends AppCompatActivity {
         PopMoviesMainActivity.this.overridePendingTransition(R.anim.trans_right_in,
                 R.anim.trans_right_out);
     }
+
+
+    public void addNewFrag(String value){
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        PopMoviesFragment fragment = new PopMoviesFragment();
+        fragment.temp = value;
+        fragmentTransaction.replace(R.id.frag_parent, fragment);
+        fragmentTransaction.commit();
+
+    }
+
 }
 

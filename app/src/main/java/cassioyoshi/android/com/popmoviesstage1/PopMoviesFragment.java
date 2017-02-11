@@ -4,7 +4,6 @@ import android.app.Fragment;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +25,8 @@ import cassioyoshi.android.com.popmoviesstage1.utilities.NetworkUtils;
 public class PopMoviesFragment extends Fragment {
 
     private String category_chooser;
+    public static String temp;
+
     public Context mContext;
     private PopMoviesAdapter adapter;
     private PopMoviesAdapter popMoviesAdapter;
@@ -42,8 +43,13 @@ public class PopMoviesFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate( R.layout.fragment_main, container, false );
+
+        if(temp == null) {category_chooser = "top_rated";}
+        if(temp == "top_rated") { category_chooser = temp;}
+        if(temp == "popular") { category_chooser = temp;}
+
         mContext = rootView.getContext();
-        new FetchMoviesTask().execute("popular");
+        new FetchMoviesTask().execute(category_chooser);
 
 
 
@@ -68,8 +74,6 @@ public class PopMoviesFragment extends Fragment {
 
             String choose_category = params[0];
             URL movieRequestUrl = NetworkUtils.buildUrl(choose_category);
-
-            Log.e( LOG_TAG, "this url is: " + movieRequestUrl );
 
             try {
                 String jsonMovieResponse = NetworkUtils
@@ -119,6 +123,10 @@ public class PopMoviesFragment extends Fragment {
 
     }
 
+
+    public void getTemp(String t){
+        temp = t;
+    }
 
 }
 

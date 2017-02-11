@@ -102,9 +102,6 @@ public class PopMoviesDetails extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.menu_spinner1) {
-            return true;
-        }
         if (id == android.R.id.home) {
             // API 5+ solution
             onBackPressed();
