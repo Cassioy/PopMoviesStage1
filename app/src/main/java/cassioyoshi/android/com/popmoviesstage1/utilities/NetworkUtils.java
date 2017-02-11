@@ -18,9 +18,8 @@ public class NetworkUtils {
     private static final String TAG = NetworkUtils.class.getSimpleName();
 
     private static final String MOVIES_BASE_URL = "http://api.themoviedb.org/3/movie/";
-    private static final String CATEGORY = "popular";
     private static final String IMAGES_BASE_URL = "http://image.tmdb.org/t/p/w500/";
-    private static final String API_KEY = "47569fa341aee731236827f968b4c01d";
+    private static final String API_KEY = "";
 
     /* The units we want our API to return */
     private static final String language = "en-US";
@@ -37,9 +36,6 @@ public class NetworkUtils {
         }catch (MalformedURLException e) {
             Log.e(TAG, "Problem building the URL ", e);
         }
-
-        Log.e(TAG, "this response is:" + url);
-
 
         return url;
     }
@@ -67,22 +63,24 @@ public class NetworkUtils {
      * @throws IOException Related to network and stream reading
      */
     public static String getResponseFromHttpUrl(URL url) throws IOException {
-        HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-        try {
-            InputStream in = urlConnection.getInputStream();
 
-            Scanner scanner = new Scanner(in);
-            scanner.useDelimiter("\\A");
+            HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+            try {
+                InputStream in = urlConnection.getInputStream();
 
-            boolean hasInput = scanner.hasNext();
-            if (hasInput) {
-                return scanner.next();
-            } else {
-                return null;
+                Scanner scanner = new Scanner( in );
+                scanner.useDelimiter( "\\A" );
+
+                boolean hasInput = scanner.hasNext();
+                if (hasInput) {
+                    return scanner.next();
+                } else {
+                    return null;
+                }
+            } finally {
+                urlConnection.disconnect();
             }
-        } finally {
-            urlConnection.disconnect();
-        }
     }
+
 }
 

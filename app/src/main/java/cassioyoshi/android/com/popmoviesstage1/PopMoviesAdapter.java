@@ -49,8 +49,6 @@ public class PopMoviesAdapter extends ArrayAdapter<PopMovies> implements Seriali
     public View getView(final int position, View convertView, ViewGroup parent){
         final PopMovies popMovies = getItem(position);
         String imageUrl = popMovies.posterSource.toString();
-        final String backDropUrl = popMovies.backdropSource.toString();
-        final String title = popMovies.mTitle;
 
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(

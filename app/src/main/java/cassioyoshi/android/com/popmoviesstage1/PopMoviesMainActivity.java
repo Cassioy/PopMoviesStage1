@@ -16,8 +16,6 @@ public class PopMoviesMainActivity extends AppCompatActivity {
     private static final String SORT_MOVIE_POPULAR = "popular";
     private static final String SORT_MOVIE_TOP_RATED = "top_rated";
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
