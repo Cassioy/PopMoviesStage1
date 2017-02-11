@@ -69,6 +69,7 @@ public class PopMoviesAdapter extends ArrayAdapter<PopMovies> implements Seriali
                 detailsIntent.putExtra( "releaseDate", popMovies.mReleaseDate );
                 detailsIntent.putExtra( "voteAvg", popMovies.mVoteAvg );
                 con.startActivity(detailsIntent);
+                ;
             }
         } );
 

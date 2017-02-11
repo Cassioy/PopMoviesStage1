@@ -19,7 +19,7 @@ public class NetworkUtils {
 
     private static final String MOVIES_BASE_URL = "http://api.themoviedb.org/3/movie/";
     private static final String IMAGES_BASE_URL = "http://image.tmdb.org/t/p/w500/";
-    private static final String API_KEY = "";
+    private static final String API_KEY = "47569fa341aee731236827f968b4c01d";
 
     /* The units we want our API to return */
     private static final String language = "en-US";

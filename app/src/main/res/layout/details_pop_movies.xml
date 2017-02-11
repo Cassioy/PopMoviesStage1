@@ -16,7 +16,7 @@
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appBar"
         android:layout_width="match_parent"
-        android:layout_height="220dp">
+        android:layout_height="@dimen/detail_backdrop_height">
 
         <android.support.design.widget.CollapsingToolbarLayout
             android:id="@+id/collapsing_toolbar"
@@ -151,7 +151,7 @@
                                 android:tint="@color/colorAccent"
                                 android:background="@drawable/circle"
                                 android:layout_gravity="center"
-                                android:textSize="22sp"
+                                android:textSize="@dimen/rating_text_size"
                                 android:text="8.5"/>
 
 
@@ -162,16 +162,17 @@
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
                                 android:layout_marginTop="@dimen/spacing_large"
-                                android:textSize="18sp"
+                                android:textSize="@dimen/info_detail_text_size"
                                 android:text="@string/release_date_title" />
 
 
                             <TextView
+
                             android:id="@+id/release_date"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:textSize="18sp"
+                            android:textSize="@dimen/info_detail_text_size"
                             android:text="@string/default_text" />
 
 
@@ -219,7 +220,7 @@
         app:layout_behavior="cassioyoshi.android.com.popmoviesstage1.utilities.FloatButtonUtils"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
+        android:layout_margin="@dimen/spacing_large"
         android:elevation="6dp"
         app:rippleColor="@color/transparent"
         android:background="?android:attr/selectableItemBackground"

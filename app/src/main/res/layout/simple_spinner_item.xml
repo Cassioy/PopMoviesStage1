@@ -6,4 +6,4 @@
           android:layout_height="wrap_content"
           android:ellipsize="marquee"
           android:textColor="@color/colorWhite"
-          android:textSize="16sp"/>
+          android:textSize="@dimen/normal_text_size"/>

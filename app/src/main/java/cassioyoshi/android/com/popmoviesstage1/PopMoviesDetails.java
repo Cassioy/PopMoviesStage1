@@ -28,6 +28,8 @@ public class PopMoviesDetails extends AppCompatActivity {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.details_pop_movies);
 
+            overridePendingTransition(R.anim.trans_right_in, R.anim.trans_right_out);
+
             URL u = (URL) getIntent().getSerializableExtra("backdropImage");
             URL t = (URL) getIntent().getSerializableExtra("posterImage");
             String imageUrl = u.toString();
